@@ -34,19 +34,13 @@ func eye(n: Int) -> [[Double]] {
 
 // Gets the appropriate matrix size for squareform
 func get_squareform_size(n: Int) -> Int {
-    var curr = 1
-    var gap = 2
-    var size = 2
-    while curr <= n {
-        if curr == n {
-            return size
-        } else {
-            curr += gap
-            gap += 1
-            size += 1
-        }
+    let d = Int(ceil(Darwin.sqrt(Double(n) * 2.0)))
+    // Check that n is of valid dimensions.
+    if d * (d - 1) / 2 != n {
+        return -1
+    } else {
+        return d
     }
-    return -1
 }
 
 func squareform(arr: [Double]) -> [[Double]] {
@@ -282,7 +276,7 @@ func nansum1d(mat: [[Double]]) -> Double {
     return sum
 }
 
-//let a = [[1.0, 2.0, 4.0], [2.0, 1.0, 4.0], [1.0, 5.0, 1.0]]
+//let a = [[1.0], [2.0], [1.0]]
 //print(nansum(mat: a, val: 1))
 
 enum AssumptionError: Error {
@@ -566,41 +560,40 @@ enum DivisionError: Error {
 // a better implementation: parse the expression directly (future)
 // also, remove the operators that do not depend on <right>
 func elementWise(op: String, left: [[Double]], right: Double) -> [[Double]] {
-    var result = [[Double]]()
-    for vec in left {
-        var new_vec = [Double]()
-        for item in vec {
+    var vec_empty = [Double](repeating: 0.0, count: left[0].count)
+    var result = [[Double]](repeating: vec_empty, count: left.count)
+    for i in 0..<left.count {
+        for j in 0..<left[0].count {
             if op == "+" {
-                new_vec.append(item + right)
+                result[i][j] = left[i][j] + right
             } else if op == "*" {
-                new_vec.append(item * right)
+                result[i][j] = left[i][j] * right
             } else if op == "exp" {
-                new_vec.append(Darwin.exp(item))
+                result[i][j] = Darwin.exp(left[i][j])
             } else if op == ">" {
-                if item > right {
-                    new_vec.append(1.0)
+                if left[i][j] > right {
+                    result[i][j] = 1.0
                 } else {
-                    new_vec.append(0.0)
+                    result[i][j] = 0.0
                 }
             } else if op == "<" {
-                if item < right {
-                    new_vec.append(1.0)
+                if left[i][j] < right {
+                    result[i][j] = 1.0
                 } else {
-                    new_vec.append(0.0)
+                    result[i][j] = 0.0
                 }
             } else if op == "~" {      // assumes that <left> is a logical array (only 0.0 and 1.0)
-                if item == 0.0 {
-                    new_vec.append(1.0)
+                if left[i][j] == 0.0 {
+                    result[i][j] = 1.0
                 } else {
-                    new_vec.append(0.0)
+                    result[i][j] = 0.0
                 }
             } else if op == "/" {
-                new_vec.append(item / right)
+                result[i][j] = left[i][j] / right
             } else if op == "^" {
-                new_vec.append(Darwin.pow(item, right))
+                result[i][j] = Darwin.pow(left[i][j], right)
             }
         }
-        result.append(new_vec)
     }
     return result
 }
