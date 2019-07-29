@@ -236,19 +236,21 @@ func createBoolMatrix(mat:[[Double]]) -> [[Bool]] {
 }
 
 // works for square matrices
-func vectorizeSimmat(mat: [[Double]]) -> [Double] {
+func vectorizeSimmat(mat: [[Double]]) -> [[Double]] {
+    var result = [[Double]]()
     var lowerT = [Double]()
     for i in 0..<mat.count {
         for j in (i+1)..<mat[i].count {
             lowerT.append(mat[i][j])
         }
     }
-    return lowerT
+    result.append(lowerT)
+    return result
 }
 
 // from matlab results, this should return an array of arrays
-func vectorizeSimmats(simmats: [[[Double]]]) -> [[Double]] {
-    var result = [[Double]]()
+func vectorizeSimmats(simmats: [[[Double]]]) -> [[[Double]]] {
+    var result = [[[Double]]]()
     for sim in simmats {
         result.append(vectorizeSimmat(mat: sim))
     }
@@ -629,7 +631,7 @@ func ceil(num: Double) -> Int {
 func squareSimmat(vec: [Double]) -> [[Double]] {
     let square = squareform(arr: vec)
     let lowerT = vectorizeSimmat(mat: square)
-    return squareform(arr: lowerT)
+    return squareform(arr: lowerT[0])
 }
 
 func ones(rows: Int, cols: Int) -> [[Double]] {

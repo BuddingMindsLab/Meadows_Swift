@@ -93,11 +93,11 @@
 				311D8AF322CA6215008A172A /* test_swift.txt */,
 				31AF65C62279393B00A0BADE /* circle.png */,
 				311FFD0F21E7C5810017454A /* CircularArenaController.swift */,
+				31AF65F5229374AE00A0BADE /* TestCircleArenaController.swift */,
 				31AF65EF227D099A00A0BADE /* CircularArena_Backup.swift */,
 				311FFD2221E7FCD90017454A /* Matlab.swift */,
 				31E5F2022228618C0009B37F /* estimateRDMFromStackOfPartials.swift */,
 				3180470B221B752600FDF3C2 /* Readme.swift */,
-				31AF65F5229374AE00A0BADE /* TestCircleArenaController.swift */,
 				311FFCFF21E7BF6A0017454A /* Main.storyboard */,
 				31AF65C4227935E200A0BADE /* CustomTableViewCell.swift */,
 				311FFCFB21E7BF6A0017454A /* AppDelegate.swift */,
@@ -345,6 +345,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 77A4G5NWW9;
 				INFOPLIST_FILE = MultiArrangement/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -363,6 +364,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 77A4G5NWW9;
 				INFOPLIST_FILE = MultiArrangement/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

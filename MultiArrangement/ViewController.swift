@@ -79,7 +79,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             controller.evidenceUtilityExponent = Double(utilityExp.text!)!
             controller.minRequiredEvidenceWeight = Double(evidenceWeightField.text!)!
             controller.maxSessionLength = Double(maxLengthField.text!)!
-            controller.maxNitemsPerTrial = Double(maxItemsField.text!)!
+            controller.maxNitemsPerTrial = 3
             
         } else if segue.identifier == "CustomSegue" {
             let controller = segue.destination as! CustomStimuliController

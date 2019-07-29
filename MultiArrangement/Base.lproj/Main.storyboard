@@ -200,11 +200,19 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HxF-d9-dZD">
-                                <rect key="frame" x="1072" y="896" width="182" height="57"/>
+                                <rect key="frame" x="1061" y="894" width="182" height="57"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="37"/>
                                 <state key="normal" title="Place Items"/>
                                 <connections>
                                     <action selector="btnPressed:" destination="a6a-l7-QsE" eventType="touchUpInside" id="CJa-6w-CqB"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vv7-Ys-uLk">
+                                <rect key="frame" x="20" y="962" width="113" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Early Finish"/>
+                                <connections>
+                                    <action selector="earlyFinish:" destination="a6a-l7-QsE" eventType="touchUpInside" id="Mlu-T9-aOQ"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -213,6 +221,8 @@
                             <bool key="isElement" value="YES"/>
                         </accessibility>
                         <constraints>
+                            <constraint firstItem="Nc8-gp-9rs" firstAttribute="trailing" secondItem="HxF-d9-dZD" secondAttribute="trailing" constant="87" id="9Kf-Es-fFj"/>
+                            <constraint firstItem="Nc8-gp-9rs" firstAttribute="bottom" secondItem="HxF-d9-dZD" secondAttribute="bottom" constant="72" id="F8s-3a-JgY"/>
                             <constraint firstItem="Nc8-gp-9rs" firstAttribute="bottom" secondItem="HxF-d9-dZD" secondAttribute="bottom" constant="111" id="Wzb-J6-oQc"/>
                             <constraint firstItem="Nc8-gp-9rs" firstAttribute="trailing" secondItem="HxF-d9-dZD" secondAttribute="trailing" constant="189" id="nVA-Wf-2b1"/>
                         </constraints>
