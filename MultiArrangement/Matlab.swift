@@ -9,9 +9,8 @@ import UIKit
 //  Copyright © 2019 Budding Minds Admin. All rights reserved.
 //
 
-// *** ensure all matrices use column vectors ***
-
 import Foundation
+import Accelerate
 
 // returns an nxn matrix of zeros
 func zeros(size: [Int]) -> [[Double]] {

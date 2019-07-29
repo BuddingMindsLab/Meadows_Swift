@@ -162,7 +162,7 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
         sendEmail(data: final_data)
     }
 
-    
+ 
     @IBOutlet weak var operation_button: UIButton!
     
     //get locations of each image after user clicks the Finish button

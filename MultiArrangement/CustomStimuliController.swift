@@ -12,6 +12,10 @@ class CustomStimuliController: UIViewController, UITableViewDataSource, UITableV
 
     @IBOutlet weak var tableView: UITableView!
     var data = [String]()
+    var evidenceUtilityExponent = Double()
+    var minRequiredEvidenceWeight = Double()
+    var maxSessionLength = Double()
+    var maxNitemsPerTrial = Double()
     var subjectID = ""
     
     override func viewDidLoad() {
@@ -19,7 +23,6 @@ class CustomStimuliController: UIViewController, UITableViewDataSource, UITableV
         
         tableView.dataSource = self as UITableViewDataSource
         // make sure data is non-nil
-        data = process_data(input: load_data(fileName: "words", fileType: "csv"))
         tableView.delegate = self
         tableView.setEditing(true, animated: true)
     }

@@ -74,19 +74,29 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         if segue.identifier == "DefaultSegue" {
             let controller = segue.destination as! CircularArenaController
             //need to load controller.stimuli right away
-            controller.stimuli = process_data(input: load_data(fileName: "words", fileType: "csv"))
             controller.subjectID = subjectField.text!
+            controller.stimuli = process_data(input: load_data(fileName: "words", fileType: "csv"))
             controller.evidenceUtilityExponent = Double(utilityExp.text!)!
             controller.minRequiredEvidenceWeight = Double(evidenceWeightField.text!)!
             controller.maxSessionLength = Double(maxLengthField.text!)!
-            controller.maxNitemsPerTrial = 3
+            controller.maxNitemsPerTrial = Double(maxItemsField.text!)!
             
         } else if segue.identifier == "CustomSegue" {
             let controller = segue.destination as! CustomStimuliController
             controller.subjectID = subjectField.text!
+            controller.data = process_data(input: load_data(fileName: "words", fileType: "csv"))
+            controller.evidenceUtilityExponent = Double(utilityExp.text!)!
+            controller.minRequiredEvidenceWeight = Double(evidenceWeightField.text!)!
+            controller.maxSessionLength = Double(maxLengthField.text!)!
+            controller.maxNitemsPerTrial = Double(maxItemsField.text!)!
         } else if segue.identifier == "SlideshowSegue" {
             let controller = segue.destination as! SlideshowController
             controller.subjectID = subjectField.text!
+            controller.data = process_data(input: load_data(fileName: "words", fileType: "csv"))
+            controller.evidenceUtilityExponent = Double(utilityExp.text!)!
+            controller.minRequiredEvidenceWeight = Double(evidenceWeightField.text!)!
+            controller.maxSessionLength = Double(maxLengthField.text!)!
+            controller.maxNitemsPerTrial = Double(maxItemsField.text!)!
         }
         
     }

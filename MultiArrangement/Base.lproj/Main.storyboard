@@ -228,6 +228,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Nc8-gp-9rs"/>
                     </view>
+                    <connections>
+                        <outlet property="operation_button" destination="HxF-d9-dZD" id="woA-MH-Gqt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f49-yD-1Ya" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -240,6 +243,26 @@
                     <view key="view" contentMode="scaleToFill" id="xx3-kR-7o4">
                         <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ul-vt-Yj4">
+                                <rect key="frame" x="314" y="673" width="250" height="250"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration" identifier="yes"/>
+                                <state key="normal" image="yes.png"/>
+                                <connections>
+                                    <action selector="yesButton:" destination="vZV-9B-Fif" eventType="touchUpInside" id="AwK-66-nNq"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X9n-nY-1IC">
+                                <rect key="frame" x="831" y="673" width="250" height="250"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration" identifier="no"/>
+                                <state key="normal" image="no.png"/>
+                                <connections>
+                                    <action selector="noButton:" destination="vZV-9B-Fif" eventType="touchUpInside" id="nY1-9a-XbS"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="bK1-Uz-HFO"/>
                     </view>
@@ -249,13 +272,15 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YrT-X5-3Ny" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1412" y="420"/>
+            <point key="canvasLocation" x="1411.2737920937041" y="419.53125"/>
         </scene>
     </scenes>
     <resources>
         <image name="circle" width="2310" height="2310"/>
+        <image name="no.png" width="421" height="425"/>
+        <image name="yes.png" width="436" height="435"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hIu-40-OHg"/>
+        <segue reference="6DF-hG-ptI"/>
     </inferredMetricsTieBreakers>
 </document>
