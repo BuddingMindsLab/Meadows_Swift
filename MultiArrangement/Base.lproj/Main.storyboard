@@ -180,10 +180,10 @@
             </objects>
             <point key="canvasLocation" x="1412" y="-346"/>
         </scene>
-        <!--Test Circle Arena Controller-->
+        <!--Circular Arena Controller-->
         <scene sceneID="UPO-Ii-bzg">
             <objects>
-                <viewController id="a6a-l7-QsE" customClass="TestCircleArenaController" customModule="MultiArrangement" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="a6a-l7-QsE" customClass="CircularArenaController" customModule="MultiArrangement" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="R5e-J8-dVO">
                         <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

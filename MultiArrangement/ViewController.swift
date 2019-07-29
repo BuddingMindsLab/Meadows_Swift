@@ -72,7 +72,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "DefaultSegue" {
-            let controller = segue.destination as! TestCircleArenaController
+            let controller = segue.destination as! CircularArenaController
             //need to load controller.stimuli right away
             controller.stimuli = process_data(input: load_data(fileName: "words", fileType: "csv"))
             controller.subjectID = subjectField.text!
