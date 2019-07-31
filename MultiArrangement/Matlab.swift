@@ -66,12 +66,16 @@ func squareform(arr: [Double]) -> [[Double]] {
 // this turns a dissimilatiry matrix into a *column* vector
 // assumes the matrix is square and is a proper dissimilarity matrix
 func inverse_squareform(arr: [[Double]]) -> [[Double]] {
-    var result = [[Double]]()
+    let n = arr.count
+    let size = (n * n - n) / 2
+    var result = [[Double]](repeating: [0.0], count: size)
     var diag_i = 0
     var diag_j = 0    // these i, j represent the diagonal indices
+    var counter = 0
     while diag_i < arr.count - 1 {
         for j in diag_j+1..<arr[diag_i].count {
-            result.append([arr[diag_i][j]])
+            result[counter] = [arr[diag_i][j]]
+            counter += 1
         }
         diag_i += 1
         diag_j += 1
