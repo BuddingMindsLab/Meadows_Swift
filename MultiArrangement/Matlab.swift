@@ -126,35 +126,12 @@ func cat(mat1: [[Double]], mat2: [[Double]]) -> [[[Double]]] {
     return base
 }
 
-
-
-func split(arr: [Double], pivot_index: Int) -> [[Double]] {
-    var result = [[Double]]()
-    var left = [Double]()
-    var right = [Double]()
-    for i in 0..<arr.count {
-        if arr[i] > arr[pivot_index] {
-            right.append(arr[i])
-        } else if i != pivot_index {
-            left.append(arr[i])
-        }
-    }
-    result.append(left)
-    result.append(right)
-    return result
-}
-
 func find_kth(arr: [Double], k: Int) -> Double {
-    let rand_index = Int.random(in: 0..<arr.count)
-    let result = split(arr: arr, pivot_index: rand_index)
-    let left = result[0]
-    let right = result[1]
-    if k == left.count+1 {
-        return arr[rand_index]
-    } else if k <= left.count {
-        return find_kth(arr: left, k: k)
-    } else {    // k > left.count+1
-        return find_kth(arr: right, k: k-(left.count+1))
+    let sorted = arr.sorted()
+    if k >= 0 || k < sorted.count {
+        return arr[k-1]
+    } else {
+        return -1
     }
 }
 
