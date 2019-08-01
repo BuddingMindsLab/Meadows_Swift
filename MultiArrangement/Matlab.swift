@@ -211,22 +211,25 @@ func createBoolMatrix(mat:[[Double]]) -> [[Bool]] {
 
 // works for square matrices
 func vectorizeSimmat(mat: [[Double]]) -> [[Double]] {
-    var result = [[Double]]()
-    var lowerT = [Double]()
+    var result = [[0.0]]
+    let n = mat.count
+    var lowerT = [Double](repeating: 0.0, count: (n*n-n)/2)
+    var counter = 0
     for i in 0..<mat.count {
         for j in (i+1)..<mat[i].count {
-            lowerT.append(mat[i][j])
+            lowerT[counter] = mat[i][j]
+            counter += 1
         }
     }
-    result.append(lowerT)
+    result[0] = lowerT
     return result
 }
 
 // from matlab results, this should return an array of arrays
 func vectorizeSimmats(simmats: [[[Double]]]) -> [[[Double]]] {
-    var result = [[[Double]]]()
-    for sim in simmats {
-        result.append(vectorizeSimmat(mat: sim))
+    var result = [[[Double]]](repeating: [[Double]](), count: simmats.count)
+    for i in 0..<simmats.count {
+        result[i] = vectorizeSimmat(mat: simmats[i])
     }
     return result
 }
@@ -237,9 +240,9 @@ func vectorizeSimmats(simmats: [[[Double]]]) -> [[[Double]]] {
 
 
 func nansum(mat: [[Double]]) -> [[Double]] {
-    var result = [[Double]]()
-    for col in mat {
-        result.append([Double(col.filter{ $0.isNaN == false }.reduce(0, +))])
+    var result = [[Double]](repeating: [0.0], count: mat.count)
+    for i in 0..<mat.count {
+        result[i] = [Double(mat[i].filter{ $0.isNaN == false }.reduce(0, +))]
     }
     return result
 }
@@ -420,9 +423,9 @@ func setdiff(A: [Int], B: [Int]) -> [Int] {
 
 // returns a row vector of the sums of the columns of <mat>
 func sum(mat: [[Double]]) -> [[Double]] {
-    var sums = [[Double]]()
-    for col in mat {
-        sums.append([col.reduce(0, +)])
+    var sums = [[Double]](repeating: [0.0], count: mat.count)
+    for i in 0..<mat.count {
+        sums[i] = [mat[i].reduce(0, +)]
     }
     return sums
 }
@@ -494,26 +497,26 @@ func pdist(mat: [[Double]]) -> [Double] {
 
 // returns an array of the maximum element in each column of <mat>
 func max(mat: [[Double]]) -> [Double] {
-    var result = [Double]()
-    for col in mat {
-        result.append(col.max()!)
+    var result = [Double](repeating: 0.0, count: mat.count)
+    for i in 0..<mat.count {
+        result[i] = mat[i].max()!
     }
     return result
 }
 // returns an array of the minimum element in each column of <mat>
 func min(mat: [[Double]]) -> [Double] {
-    var result = [Double]()
-    for col in mat {
-        result.append(col.min()!)
+    var result = [Double](repeating: 0.0, count: mat.count)
+    for i in 0..<mat.count {
+        result[i] = mat[i].min()!
     }
     return result
 }
 // returns an array of the mean of each column of <mat>
 func mean(mat: [[Double]]) -> [Double] {
-    var result = [Double]()
-    for col in mat {
-        let s = col.reduce(0, +)
-        result.append(s / Double(col.count))
+    var result = [Double](repeating: 0.0, count: mat.count)
+    for i in 0..<mat.count {
+        let s = mat[i].reduce(0, +)
+        result[i] = (s / Double(mat[i].count))
     }
     return result
 }
@@ -612,6 +615,8 @@ func ones(rows: Int, cols: Int) -> [[Double]] {
     return [[Double]](repeating: col, count: cols)
 }
 
+// This assumes the indices have been adjusted for Swift (0 based)
+// Using MATLAB indices here will result in error
 func matrix_partition(mat: [[Double]], rows: [Int], cols: [Int]) -> [[Double]] {
     var new_mat = [[Double]]()
     for j in cols {
@@ -721,9 +726,9 @@ func find_1d(arr: [Double], val: Double) -> [Int] {
 
 // returns the int rep of <arr> by casting
 func double_to_int(arr: [Double]) -> [Int] {
-    var int_arr = [Int]()
+    var int_arr = [Int](repeating: 0, count: arr.count)
     for i in 0..<arr.count {
-        int_arr.append(Int(arr[i]))
+        int_arr[i] = Int(arr[i])
     }
     return int_arr
 }
