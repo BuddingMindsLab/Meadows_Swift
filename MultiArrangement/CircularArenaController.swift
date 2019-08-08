@@ -67,8 +67,8 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
     var final_result = story()
     
     let center_x = Double(UIScreen.main.bounds.width) / 2.0 - 46.0
-    let center_y = Double(UIScreen.main.bounds.height) / 2.0 - 38.0
-    let radius = 530.0
+    let center_y = Double(UIScreen.main.bounds.height) / 2.0 - 20.0
+    let radius = 480.0
     let visual_radius = 728.0 / 2.0
     
     var file_name = ""
@@ -129,6 +129,8 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
 
             thisLabel.isHidden = false
             self.view.addSubview(thisLabel)
+            
+            // add labels to list for operation button activation
         }
         // start clock for this round
         start = Double(DispatchTime.now().uptimeNanoseconds) / 1000000000.0
@@ -172,6 +174,7 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
             drawBackground(stimuli_indices: cTrial_itemIs)
             first_press = false
             operation_button.setTitle("Finished", for: .normal)
+//            operation_button.isUserInteractionEnabled = false
         } else {
             // reset currentPos dictionary for new stimuli
             for word in stimuli {
