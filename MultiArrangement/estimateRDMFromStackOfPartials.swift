@@ -27,6 +27,11 @@ func estimateRDM (distMats: [[[Double]]]) -> [[[Double]]] {
     }
     //    print("stackOfPartialRDMs_ltv")
     //    print(stackOfPartialRDMs_ltv)
+    
+    
+    
+    
+    // index out of range
     let nPairs = stackOfPartialRDMs_ltv[0].count
     let nDissimPartialMats = stackOfPartialRDMs_ltv.count
     let nItems = (1 + Darwin.pow((1.0+8.0*Double(nPairs)), 0.5))/2.0
