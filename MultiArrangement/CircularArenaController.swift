@@ -70,6 +70,7 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
     let center_y = Double(UIScreen.main.bounds.height) / 2.0 - 20.0
     let radius = 480.0
     let visual_radius = 728.0 / 2.0
+    var draggedViews = [String:Bool]()
     
     var file_name = ""
     
@@ -114,7 +115,7 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
         for i in 0..<stimuli_indices.count {
             // programmatically add labels with corresponding words to arena
 
-            let thisLabel:UILabel = UILabel(frame: CGRect(x: pos[i][0], y: pos[i][1], width: 100, height: 32))
+            let thisLabel:UILabel = UILabel(frame: CGRect(x: pos[i][0], y: pos[i][1], width: 120, height: 55))
             thisLabel.textAlignment = .center
             thisLabel.text = stimuli[stimuli_indices[i] - 1]    // -1
             thisLabel.textColor = UIColor.black
@@ -123,6 +124,7 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
 //            print(stimuli[stimuli_indices[i] - 1])
             thisLabel.isUserInteractionEnabled = true
             thisLabel.accessibilityIdentifier = thisLabel.text!
+            draggedViews[thisLabel.accessibilityIdentifier!] = false
             let gesture = UIPanGestureRecognizer(target: self,
                                                  action: #selector (draggingView(_:)))
             thisLabel.addGestureRecognizer(gesture)
@@ -155,7 +157,14 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
         let point = sender.location(in: view)
         let draggedView = sender.view!
         draggedView.center = CGPoint(x: point.x, y: point.y)
-        //print(draggedView.center)
+        if (sender.state == .ended) {
+            if (Darwin.pow(Darwin.pow(Double(draggedView.center.x)-center_x, 2.0) + Darwin.pow(Double(draggedView.center.y)-center_y, 2.0), 0.5) <= visual_radius) {
+                draggedViews[draggedView.accessibilityIdentifier!] = true
+            }
+            if (!draggedViews.values.contains(false)) {
+                operation_button.isUserInteractionEnabled = true
+            }
+        }
     }
 
     @IBAction func earlyFinish(_ sender: Any) {
@@ -174,7 +183,7 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
             drawBackground(stimuli_indices: cTrial_itemIs)
             first_press = false
             operation_button.setTitle("Finished", for: .normal)
-//            operation_button.isUserInteractionEnabled = false
+            operation_button.isUserInteractionEnabled = false
         } else {
             // reset currentPos dictionary for new stimuli
             for word in stimuli {
