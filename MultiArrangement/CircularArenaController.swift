@@ -107,6 +107,7 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
 
     func drawBackground(stimuli_indices: [Int]) {
         currIter += 1
+        draggedViews = [String:Bool]()
         //print("drawing")
         //self.view.backgroundColor = UIColor.lightGray
         let pos = getPositions(n: stimuli_indices.count)
@@ -124,7 +125,6 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
 //            print(stimuli[stimuli_indices[i] - 1])
             thisLabel.isUserInteractionEnabled = true
             thisLabel.accessibilityIdentifier = thisLabel.text!
-            draggedViews = [String:Bool]()
             draggedViews[thisLabel.accessibilityIdentifier!] = false
             let gesture = UIPanGestureRecognizer(target: self,
                                                  action: #selector (draggingView(_:)))
