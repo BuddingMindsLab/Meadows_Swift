@@ -17,6 +17,7 @@ class CustomStimuliController: UIViewController, UITableViewDataSource, UITableV
     var maxSessionLength = Double()
     var maxNitemsPerTrial = Double()
     var subjectID = ""
+    var maxNumIterations = 60
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,9 +87,14 @@ class CustomStimuliController: UIViewController, UITableViewDataSource, UITableV
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destVC: TestCircleArenaController = segue.destination as! TestCircleArenaController
+        let destVC: CircularArenaController = segue.destination as! CircularArenaController
         destVC.subjectID = subjectID
-        //destVC.stimuli = data
+        destVC.evidenceUtilityExponent = evidenceUtilityExponent
+        destVC.maxNitemsPerTrial = maxNitemsPerTrial
+        destVC.maxSessionLength = maxSessionLength
+        destVC.minRequiredEvidenceWeight = minRequiredEvidenceWeight
+        destVC.maxNumIterations = maxNumIterations
+        destVC.stimuli = data
     }
     
     // maps the indexPaths obtained from multiple selection onto their corresponding string value

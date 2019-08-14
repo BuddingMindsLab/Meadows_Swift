@@ -40,6 +40,8 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
     var utilityBenefit = 0.0
     var timeLimit = 200.0    //change this for testing purposes
     var round_start_time = Double()
+    var maxNumIterations = 60
+    var currIter = 0
     
     var currentPos = [String : [Double]]()   // the current positions of the images <id(str) -> pos(list)>
     var currPos = [[Double]]()   // temp for currentPos above
@@ -107,6 +109,7 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
 
 
     func drawBackground(stimuli_indices: [Int]) {
+        currIter += 1
         //print("drawing")
         //self.view.backgroundColor = UIColor.lightGray
         let pos = getPositions(n: stimuli_indices.count)
@@ -205,7 +208,7 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
             // same functionality as first while loop condition in previous version of startTrial()
             let argument = evidenceWeight_ltv.flatMap{ $0 }
 
-            if (self.minEvidenceWeight < self.minRequiredEvidenceWeight && (any(mat: argument, val: 0.0)) || etime(start: start) < maxSessionLength) {
+            if  (currIter < maxNumIterations || self.minEvidenceWeight < self.minRequiredEvidenceWeight && (any(mat: argument, val: 0.0)) || etime(start: start) < maxSessionLength) {
                 // remove all labels
                 for label in view.subviews{
                     if label.accessibilityIdentifier != nil {

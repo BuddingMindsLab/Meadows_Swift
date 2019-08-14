@@ -17,6 +17,7 @@ class SlideshowController: UIViewController {
     var minRequiredEvidenceWeight = Double()
     var maxSessionLength = Double()
     var maxNitemsPerTrial = Double()
+    var maxNumIterations = 60
     
     let center_x = Double(UIScreen.main.bounds.width) / 2.0
     let center_y = Double(UIScreen.main.bounds.height) / 3.0
@@ -67,5 +68,6 @@ class SlideshowController: UIViewController {
         controller.minRequiredEvidenceWeight = self.minRequiredEvidenceWeight
         controller.maxSessionLength = self.maxSessionLength
         controller.maxNitemsPerTrial = self.maxNitemsPerTrial
+        controller.maxNumIterations = maxNumIterations
     }
 }
