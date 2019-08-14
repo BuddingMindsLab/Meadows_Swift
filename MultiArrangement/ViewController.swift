@@ -18,6 +18,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBOutlet weak var maxLengthField: UITextField!
     @IBOutlet weak var maxItemsField: UITextField!
     @IBOutlet weak var maxNumIterations: UITextField!
+    @IBOutlet weak var deterministic: UISwitch!
+    @IBOutlet weak var numToPlace: UITextField!
     
     @IBOutlet weak var mPicker: UIPickerView!
     
@@ -82,6 +84,9 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             controller.maxSessionLength = Double(maxLengthField.text!)!
             controller.maxNitemsPerTrial = Double(maxItemsField.text!)!
             controller.maxNumIterations = Int(maxNumIterations.text!)!
+            if (deterministic.isOn) {
+                controller.fixedItemsPerIteration = Int(numToPlace.text!)!
+            }
         } else if segue.identifier == "CustomSegue" {
             let controller = segue.destination as! CustomStimuliController
             controller.subjectID = subjectField.text!
@@ -91,6 +96,9 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             controller.maxSessionLength = Double(maxLengthField.text!)!
             controller.maxNitemsPerTrial = Double(maxItemsField.text!)!
             controller.maxNumIterations = Int(maxNumIterations.text!)!
+            if (deterministic.isOn) {
+                controller.fixedItemsPerIteration = Int(numToPlace.text!)!
+            }
         } else if segue.identifier == "SlideshowSegue" {
             let controller = segue.destination as! SlideshowController
             controller.subjectID = subjectField.text!
@@ -100,6 +108,9 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             controller.maxSessionLength = Double(maxLengthField.text!)!
             controller.maxNitemsPerTrial = Double(maxItemsField.text!)!
             controller.maxNumIterations = Int(maxNumIterations.text!)!
+            if (deterministic.isOn) {
+                controller.fixedItemsPerIteration = Int(numToPlace.text!)!
+            }
         }
         
     }

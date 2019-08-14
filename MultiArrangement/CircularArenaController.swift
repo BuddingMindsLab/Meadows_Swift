@@ -82,6 +82,8 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
     var maxIs = [Int]()
     var cTrial_itemIs_adjusted_index = [Int]()
     
+    var fixedItemsPerIteration = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -179,10 +181,19 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
  
     @IBOutlet weak var operation_button: UIButton!
     
+    func set_random_indices() {
+        let indices = Array(0..<stimuli.count).shuffled()
+        cTrial_itemIs = indices.choose(fixedItemsPerIteration)
+    }
+    
     //get locations of each image after user clicks the Finish button
     @IBAction func btnPressed(_ sender: Any) {
         if first_press == true {
-            prepare_matrices()
+            if (fixedItemsPerIteration == 0) {
+                prepare_matrices()
+            } else {
+                set_random_indices()
+            }
             drawBackground(stimuli_indices: cTrial_itemIs)
             first_press = false
             operation_button.setTitle("Finished", for: .normal)
@@ -218,7 +229,11 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
                 // calculate new stimuli set, process should update cTrial_itemIs
                 // this process is done in finishup()
                 // draw new labels
-                prepare_matrices()
+                if (fixedItemsPerIteration == 0) {
+                    prepare_matrices()
+                } else {
+                    set_random_indices()
+                }
                 drawBackground(stimuli_indices: cTrial_itemIs)
             } else {
                 // experiment is finished

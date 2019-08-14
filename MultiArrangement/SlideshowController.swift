@@ -18,6 +18,7 @@ class SlideshowController: UIViewController {
     var maxSessionLength = Double()
     var maxNitemsPerTrial = Double()
     var maxNumIterations = 60
+    var fixedItemsPerIteration = 0
     
     let center_x = Double(UIScreen.main.bounds.width) / 2.0
     let center_y = Double(UIScreen.main.bounds.height) / 3.0
@@ -69,5 +70,6 @@ class SlideshowController: UIViewController {
         controller.maxSessionLength = self.maxSessionLength
         controller.maxNitemsPerTrial = self.maxNitemsPerTrial
         controller.maxNumIterations = maxNumIterations
+        controller.fixedItemsPerIteration = fixedItemsPerIteration
     }
 }

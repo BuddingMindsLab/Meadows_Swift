@@ -18,6 +18,7 @@ class CustomStimuliController: UIViewController, UITableViewDataSource, UITableV
     var maxNitemsPerTrial = Double()
     var subjectID = ""
     var maxNumIterations = 60
+    var fixedItemsPerIteration = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,6 +96,7 @@ class CustomStimuliController: UIViewController, UITableViewDataSource, UITableV
         destVC.minRequiredEvidenceWeight = minRequiredEvidenceWeight
         destVC.maxNumIterations = maxNumIterations
         destVC.stimuli = data
+        destVC.fixedItemsPerIteration = fixedItemsPerIteration
     }
     
     // maps the indexPaths obtained from multiple selection onto their corresponding string value
