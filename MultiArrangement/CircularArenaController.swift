@@ -124,6 +124,7 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
 //            print("actual text")
 //            print(stimuli[stimuli_indices[i] - 1])
             thisLabel.isUserInteractionEnabled = true
+            operation_button.isHidden = false
             thisLabel.accessibilityIdentifier = thisLabel.text!
             draggedViews[thisLabel.accessibilityIdentifier!] = false
             let gesture = UIPanGestureRecognizer(target: self,
@@ -164,6 +165,7 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
             }
             if (!draggedViews.values.contains(false)) {
                 operation_button.isUserInteractionEnabled = true
+                operation_button.isHidden = false
             }
         }
     }
@@ -194,8 +196,10 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
             first_press = false
             operation_button.setTitle("Finished", for: .normal)
             operation_button.isUserInteractionEnabled = false
+            operation_button.isHidden = true
         } else {
             operation_button.isUserInteractionEnabled = false
+            operation_button.isHidden = true
             currentPos = [String:[Double]]()
             // gets the positions of all the labels on screen
             for label in view.subviews {

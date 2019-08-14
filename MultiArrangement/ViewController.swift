@@ -131,7 +131,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         }
         do {
             let contents = try String(contentsOfFile: filepath, encoding: .utf8)
-            let data = contents.components(separatedBy: "\r")
+            let data = contents.components(separatedBy: "\r\n")
+//            print(data)
             return data
         } catch {
             return nil
