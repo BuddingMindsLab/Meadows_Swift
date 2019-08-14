@@ -87,11 +87,6 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // fill in dictionary with nil values
-        for word in stimuli {
-            currentPos[word] = nil
-        }
-
         nItems = stimuli.count
         nPairs = nItems * (nItems - 1) / 2   // pairs = n(n-1)/2
         
@@ -129,6 +124,7 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
 //            print(stimuli[stimuli_indices[i] - 1])
             thisLabel.isUserInteractionEnabled = true
             thisLabel.accessibilityIdentifier = thisLabel.text!
+            draggedViews = [String:Bool]()
             draggedViews[thisLabel.accessibilityIdentifier!] = false
             let gesture = UIPanGestureRecognizer(target: self,
                                                  action: #selector (draggingView(_:)))
@@ -163,7 +159,7 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
         let draggedView = sender.view!
         draggedView.center = CGPoint(x: point.x, y: point.y)
         if (sender.state == .ended) {
-            if (Darwin.pow(Darwin.pow(Double(draggedView.center.x)-center_x, 2.0) + Darwin.pow(Double(draggedView.center.y)-center_y, 2.0), 0.5) <= visual_radius) {
+            if (Darwin.pow(Darwin.pow(Double(draggedView.center.x)-center_x, 2.0) + Darwin.pow(Double(draggedView.center.y)-center_y, 2.0), 0.5) <= visual_radius + 30.0) {
                 draggedViews[draggedView.accessibilityIdentifier!] = true
             }
             if (!draggedViews.values.contains(false)) {
@@ -199,10 +195,8 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
             operation_button.setTitle("Finished", for: .normal)
             operation_button.isUserInteractionEnabled = false
         } else {
-            // reset currentPos dictionary for new stimuli
-            for word in stimuli {
-                currentPos[word] = nil
-            }
+            operation_button.isUserInteractionEnabled = false
+            currentPos = [String:[Double]]()
             // gets the positions of all the labels on screen
             for label in view.subviews {
                 if label.accessibilityIdentifier != nil {
@@ -414,10 +408,19 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
         subjectWork_nDragsEstimate = subjectWork_nDragsEstimate + Darwin.pow(Darwin.pow(quant, 0.5), dragsExponent)
         
         var distMatFullSize = nan_grid(num_rows: nItems, num_cols: nItems)
+        print("currentPos")
+        print(currentPos)
+        print("distmatltv")
+        print(distMat_ltv.count)
         let squared = squareform(arr: distMat_ltv)
         let flat_distMat = squared.flatMap{$0}
         cTrial_itemIs_adjusted_index = cTrial_itemIs.compactMap{$0 - 1}
         cTrial_itemIs_adjusted_index.sort()
+        print("four numbers")
+        print(distMatFullSize.count)
+        print(distMatFullSize[0].count)
+        print(cTrial_itemIs_adjusted_index)
+        print(flat_distMat.count)
         distMatFullSize = replace_by_vector_indexing(mat: distMatFullSize, v1: cTrial_itemIs_adjusted_index, v2: cTrial_itemIs_adjusted_index, val: flat_distMat)
         
         var distMatFullSize_ltv = vectorizeSimmat(mat: distMatFullSize)
