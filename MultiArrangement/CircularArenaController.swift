@@ -68,9 +68,12 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
     
     var final_result = story()
     
-    let center_x = Double(UIScreen.main.bounds.width) / 2.0 - 46.0
-    let center_y = Double(UIScreen.main.bounds.height) / 2.0 - 20.0
+    let center_x = Double(UIScreen.main.bounds.width) / 2.0 - 56.0
+    let center_y = Double(UIScreen.main.bounds.height) / 2.0 - 15.0
+    let dragging_x = 695.0
+    let dragging_y = 523.0
     let radius = 480.0
+    let dragging_radius = 400.0
     let visual_radius = 728.0 / 2.0
     var draggedViews = [String:Bool]()
     
@@ -160,12 +163,17 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
         let draggedView = sender.view!
         draggedView.center = CGPoint(x: point.x, y: point.y)
         if (sender.state == .ended) {
-            if (Darwin.pow(Darwin.pow(Double(draggedView.center.x)-center_x, 2.0) + Darwin.pow(Double(draggedView.center.y)-center_y, 2.0), 0.5) <= radius) {
+            if (Darwin.pow(Darwin.pow(Double(draggedView.center.x)-dragging_x, 2.0) + Darwin.pow(Double(draggedView.center.y)-dragging_y, 2.0), 0.5) <= dragging_radius) {
                 draggedViews[draggedView.accessibilityIdentifier!] = true
+            } else {
+                draggedViews[draggedView.accessibilityIdentifier!] = false
             }
             if (!draggedViews.values.contains(false)) {
                 operation_button.isUserInteractionEnabled = true
                 operation_button.isHidden = false
+            } else {
+                operation_button.isUserInteractionEnabled = false
+                operation_button.isHidden = true
             }
         }
     }
