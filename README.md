@@ -18,4 +18,6 @@ https://www.frontiersin.org/articles/10.3389/fpsyg.2012.00245/full
  
 ## During Experiment
 *Early Finish*: this option will save the current experiment data as a .csv file on the iPad.   
-It also opens an email dialog where the .csv file is loaded as an attachment.
+It also opens an email dialog where the .csv file is loaded as an attachment.  
+  
+To ensure an uninterrupted experiment, please disable the Control Center (swipe up from bottom of screen) while using the app by doing the following: https://www.imore.com/control-center#apps
