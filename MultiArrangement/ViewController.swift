@@ -38,6 +38,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         mPicker.delegate = self
     }
     
+    // code for scrollwheel to pick the Group ID
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -131,8 +132,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         }
         do {
             let contents = try String(contentsOfFile: filepath, encoding: .utf8)
+            
+            // depending on how your OS delimits your newlines, this "\r" may have to change to "\r\n" or "\n"
             let data = contents.components(separatedBy: "\r")
-            print(data)
+//            print(data)
             return data
         } catch {
             return nil

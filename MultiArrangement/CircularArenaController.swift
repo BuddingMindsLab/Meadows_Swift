@@ -70,12 +70,11 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
     
     let center_x = Double(UIScreen.main.bounds.width) / 2.0 - 56.0
     let center_y = Double(UIScreen.main.bounds.height) / 2.0 - 15.0
-    let dragging_x = 695.0
-    let dragging_y = 523.0
+    let dragging_x = Double(UIScreen.main.bounds.width) / 2.0 + 12.0
+    let dragging_y = Double(UIScreen.main.bounds.height) / 2.0 + 11.0
     let radius = 480.0
-    let dragging_radius = 400.0
-    let visual_radius = 728.0 / 2.0
-    var draggedViews = [String:Bool]()
+    let dragging_radius = 400.0     // any item outide of this radius will be outside of the circle's border
+    var draggedViews = [String:Bool]()  // String: label text, Bool: true iff the label is within circle's border
     
     var file_name = ""
     
@@ -97,12 +96,6 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
         
         startTrialSetup()   // was originally part of viewDidAppear
     }
-//
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        //startTrial()
-//        startTrialSetup()
-//    }
 
 
     @IBOutlet weak var mScreen: UIView!
@@ -162,7 +155,10 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
         let point = sender.location(in: view)
         let draggedView = sender.view!
         draggedView.center = CGPoint(x: point.x, y: point.y)
+        
+        // runs when dragging has stopped
         if (sender.state == .ended) {
+            // when the label is within the circle's radius
             if (Darwin.pow(Darwin.pow(Double(draggedView.center.x)-dragging_x, 2.0) + Darwin.pow(Double(draggedView.center.y)-dragging_y, 2.0), 0.5) <= dragging_radius) {
                 draggedViews[draggedView.accessibilityIdentifier!] = true
             } else {
@@ -171,7 +167,7 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
             if (!draggedViews.values.contains(false)) {
                 operation_button.isUserInteractionEnabled = true
                 operation_button.isHidden = false
-            } else {
+            } else { // case for when user drags a view inside, then drags it out
                 operation_button.isUserInteractionEnabled = false
                 operation_button.isHidden = true
             }
@@ -187,6 +183,8 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
  
     @IBOutlet weak var operation_button: UIButton!
     
+    // chooses fixItemsPerIteration indices at random
+    // must ensure that fixedItemsPerIteration <= stimuli.count
     func set_random_indices() {
         let indices = Array(0..<stimuli.count).shuffled()
         cTrial_itemIs = indices.choose(fixedItemsPerIteration)
@@ -212,9 +210,9 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
             // gets the positions of all the labels on screen
             for label in view.subviews {
                 if label.accessibilityIdentifier != nil {
-                    // scale such that arena's diameter corresponds to 1.0
-                    let x = (Double(label.center.x) - center_x) / visual_radius
-                    let y = (Double(label.center.y) - center_y) / visual_radius
+                    // scale such that arena's radius corresponds to 1.0
+                    let x = (Double(label.center.x) - dragging_x) / dragging_radius
+                    let y = (Double(label.center.y) - dragging_y) / dragging_radius
                     currentPos[label.accessibilityIdentifier!] = [x, y]
                 }
             }
@@ -267,6 +265,7 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
         trialI = 0
     }
 
+    // translation of code from Mur et al. multi_arrangement_2017 code
     func prepare_matrices() {
         let negate = elementWise(op: "*", left: evidenceWeight_ltv, right: -1)
         let etothe = elementWise(op: "*", left: negate, right: evidenceUtilityExponent)
@@ -421,19 +420,20 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
         subjectWork_nDragsEstimate = subjectWork_nDragsEstimate + Darwin.pow(Darwin.pow(quant, 0.5), dragsExponent)
         
         var distMatFullSize = nan_grid(num_rows: nItems, num_cols: nItems)
-        print("currentPos")
-        print(currentPos)
-        print("distmatltv")
-        print(distMat_ltv.count)
+//        print("currentPos")
+//        print(currentPos)
+//        print("distmatltv")
+//        print(distMat_ltv.count)
         let squared = squareform(arr: distMat_ltv)
         let flat_distMat = squared.flatMap{$0}
         cTrial_itemIs_adjusted_index = cTrial_itemIs.compactMap{$0 - 1}
         cTrial_itemIs_adjusted_index.sort()
-        print("four numbers")
-        print(distMatFullSize.count)
-        print(distMatFullSize[0].count)
-        print(cTrial_itemIs_adjusted_index)
-        print(flat_distMat.count)
+        // check here for debugging index errors:
+//        print("four numbers")
+//        print(distMatFullSize.count)
+//        print(distMatFullSize[0].count)
+//        print(cTrial_itemIs_adjusted_index)
+//        print(flat_distMat.count)
         distMatFullSize = replace_by_vector_indexing(mat: distMatFullSize, v1: cTrial_itemIs_adjusted_index, v2: cTrial_itemIs_adjusted_index, val: flat_distMat)
         
         var distMatFullSize_ltv = vectorizeSimmat(mat: distMatFullSize)
@@ -497,7 +497,10 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
         return result
     }
 
+    // only works on actual iPad, does not work on simulator
     func sendEmail(data: String) {
+        print("Final csv data for email attachment: ")
+        print(data)
         let fileName = subjectID + ".csv"
         let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName)
         do {
@@ -512,7 +515,7 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
                 try mail.addAttachmentData(NSData(contentsOf: path!) as Data, mimeType: "text/csv", fileName: subjectID + ".csv")
                 present(mail, animated: true)
             } else {
-                print("Email failed")
+                print("Email failed, perhaps you're on a simulator?")
             }
         } catch {
             print("Attachment failed")
