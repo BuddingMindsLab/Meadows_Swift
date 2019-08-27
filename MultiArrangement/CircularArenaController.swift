@@ -160,7 +160,7 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
         let draggedView = sender.view!
         draggedView.center = CGPoint(x: point.x, y: point.y)
         if (sender.state == .ended) {
-            if (Darwin.pow(Darwin.pow(Double(draggedView.center.x)-center_x, 2.0) + Darwin.pow(Double(draggedView.center.y)-center_y, 2.0), 0.5) <= radius + 20.0) {
+            if (Darwin.pow(Darwin.pow(Double(draggedView.center.x)-center_x, 2.0) + Darwin.pow(Double(draggedView.center.y)-center_y, 2.0), 0.5) <= radius) {
                 draggedViews[draggedView.accessibilityIdentifier!] = true
             }
             if (!draggedViews.values.contains(false)) {
@@ -245,6 +245,7 @@ class CircularArenaController: UIViewController, MFMailComposeViewControllerDele
 
     func startTrialSetup() {
         //useful to have precomputed
+        print(nItems)
         eye_nitems = eye(n: nItems)
         
         verIs = ndgrid(bounds: [[1,nItems], [1,nItems]])

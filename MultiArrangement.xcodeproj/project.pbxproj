@@ -16,10 +16,9 @@
 		311FFD0621E7BF6C0017454A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 311FFD0421E7BF6C0017454A /* LaunchScreen.storyboard */; };
 		311FFD1021E7C5810017454A /* CircularArenaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FFD0F21E7C5810017454A /* CircularArenaController.swift */; };
 		311FFD2321E7FCD90017454A /* Matlab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FFD2221E7FCD90017454A /* Matlab.swift */; };
-		31217CD92268C3AC006B0A0B /* meadows_stimuli.csv in Resources */ = {isa = PBXBuildFile; fileRef = 31217CD82268C3AC006B0A0B /* meadows_stimuli.csv */; };
 		31217CDB2268CE3F006B0A0B /* CustomStimuliController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31217CDA2268CE3F006B0A0B /* CustomStimuliController.swift */; };
 		31217CDD2268CE4C006B0A0B /* SlideshowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31217CDC2268CE4C006B0A0B /* SlideshowController.swift */; };
-		316929DF2304A3490046057F /* words.csv in Resources */ = {isa = PBXBuildFile; fileRef = 316929DE2304A3490046057F /* words.csv */; };
+		316929E1231582D80046057F /* words_updated.csv in Resources */ = {isa = PBXBuildFile; fileRef = 316929E0231582D80046057F /* words_updated.csv */; };
 		3180470C221B752600FDF3C2 /* Readme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3180470B221B752600FDF3C2 /* Readme.swift */; };
 		31A2CDB422EF463A006C6D1B /* yes.png in Resources */ = {isa = PBXBuildFile; fileRef = 31A2CDB322EF463A006C6D1B /* yes.png */; };
 		31A2CDB622EF4640006C6D1B /* no.png in Resources */ = {isa = PBXBuildFile; fileRef = 31A2CDB522EF4640006C6D1B /* no.png */; };
@@ -43,10 +42,9 @@
 		311FFD0F21E7C5810017454A /* CircularArenaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularArenaController.swift; sourceTree = "<group>"; };
 		311FFD2221E7FCD90017454A /* Matlab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matlab.swift; sourceTree = "<group>"; };
 		31217CD722677510006B0A0B /* TestField.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = TestField.playground; path = ../../TestField.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		31217CD82268C3AC006B0A0B /* meadows_stimuli.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = meadows_stimuli.csv; sourceTree = "<group>"; };
 		31217CDA2268CE3F006B0A0B /* CustomStimuliController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStimuliController.swift; sourceTree = "<group>"; };
 		31217CDC2268CE4C006B0A0B /* SlideshowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideshowController.swift; sourceTree = "<group>"; };
-		316929DE2304A3490046057F /* words.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = words.csv; sourceTree = "<group>"; };
+		316929E0231582D80046057F /* words_updated.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = words_updated.csv; sourceTree = "<group>"; };
 		317F3C8321FD034500D4A222 /* testing.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = testing.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		3180470B221B752600FDF3C2 /* Readme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Readme.swift; sourceTree = "<group>"; };
 		31A2CDB322EF463A006C6D1B /* yes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yes.png; sourceTree = "<group>"; };
@@ -92,8 +90,7 @@
 				311FFCFD21E7BF6A0017454A /* ViewController.swift */,
 				31217CDA2268CE3F006B0A0B /* CustomStimuliController.swift */,
 				31217CDC2268CE4C006B0A0B /* SlideshowController.swift */,
-				316929DE2304A3490046057F /* words.csv */,
-				31217CD82268C3AC006B0A0B /* meadows_stimuli.csv */,
+				316929E0231582D80046057F /* words_updated.csv */,
 				311D8AF322CA6215008A172A /* test_swift.txt */,
 				31AF65C62279393B00A0BADE /* circle.png */,
 				31A2CDB322EF463A006C6D1B /* yes.png */,
@@ -174,13 +171,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				31217CD92268C3AC006B0A0B /* meadows_stimuli.csv in Resources */,
 				311D8AF422CA6215008A172A /* test_swift.txt in Resources */,
 				311FFD0621E7BF6C0017454A /* LaunchScreen.storyboard in Resources */,
 				31A2CDB422EF463A006C6D1B /* yes.png in Resources */,
-				316929DF2304A3490046057F /* words.csv in Resources */,
 				311FFD0321E7BF6C0017454A /* Assets.xcassets in Resources */,
 				311FFD0121E7BF6A0017454A /* Main.storyboard in Resources */,
+				316929E1231582D80046057F /* words_updated.csv in Resources */,
 				31A2CDB622EF4640006C6D1B /* no.png in Resources */,
 				31AF65C72279393B00A0BADE /* circle.png in Resources */,
 			);

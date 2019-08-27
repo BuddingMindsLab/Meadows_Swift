@@ -78,7 +78,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             let controller = segue.destination as! CircularArenaController
             //need to load controller.stimuli right away
             controller.subjectID = subjectField.text!
-            controller.stimuli = process_data(input: load_data(fileName: "words", fileType: "csv"))
+            controller.stimuli = process_data(input: load_data(fileName: "words_updated", fileType: "csv"))
             controller.evidenceUtilityExponent = Double(utilityExp.text!)!
             controller.minRequiredEvidenceWeight = Double(evidenceWeightField.text!)!
             controller.maxSessionLength = Double(maxLengthField.text!)!
@@ -90,7 +90,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         } else if segue.identifier == "CustomSegue" {
             let controller = segue.destination as! CustomStimuliController
             controller.subjectID = subjectField.text!
-            controller.data = process_data(input: load_data(fileName: "words", fileType: "csv"))
+            controller.data = process_data(input: load_data(fileName: "words_updated", fileType: "csv"))
             controller.evidenceUtilityExponent = Double(utilityExp.text!)!
             controller.minRequiredEvidenceWeight = Double(evidenceWeightField.text!)!
             controller.maxSessionLength = Double(maxLengthField.text!)!
@@ -102,7 +102,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         } else if segue.identifier == "SlideshowSegue" {
             let controller = segue.destination as! SlideshowController
             controller.subjectID = subjectField.text!
-            controller.data = process_data(input: load_data(fileName: "words", fileType: "csv"))
+            controller.data = process_data(input: load_data(fileName: "words_updated", fileType: "csv"))
             controller.evidenceUtilityExponent = Double(utilityExp.text!)!
             controller.minRequiredEvidenceWeight = Double(evidenceWeightField.text!)!
             controller.maxSessionLength = Double(maxLengthField.text!)!
@@ -131,8 +131,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         }
         do {
             let contents = try String(contentsOfFile: filepath, encoding: .utf8)
-            let data = contents.components(separatedBy: "\r\n")
-//            print(data)
+            let data = contents.components(separatedBy: "\r")
+            print(data)
             return data
         } catch {
             return nil
